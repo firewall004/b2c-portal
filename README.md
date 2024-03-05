@@ -16,6 +16,23 @@ Additional Module Feature would be - Add Product, Edit & Update Product, Delete 
 
 6. Logout : User would be able to logout by clicking on this button.
 
+## Requirements
+
+1. PHP 8.3
+2. Node 16
+3. MySQL 5.6
+
+## Installation
+
+1. Clone/Download the repo
+2. Copy the `env.example` to `.env`
+3. Create a new database schema and modify the database connection accordingly
+4. Run `composer install`
+5. Run `npm install`
+6. Run `php artisan migrate`
+7. Run `php artisan serve`
+8. Run `npm run dev`
+
 ## Notes
 
 1. User is of 2 types - admin and normal user
