@@ -39,3 +39,4 @@ Additional Module Feature would be - Add Product, Edit & Update Product, Delete 
 2. Admin will have the access to view all the users
 3. Without authentication, anyone can see the dashboard analytic cards
 4. Other modules, i.e. Products and Customers can be accessed only after login authentication.
+5. To make a user admin, execute command `php artisan make:admin {user's email}`
