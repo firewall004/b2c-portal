@@ -2,19 +2,19 @@
 
 namespace App\Exports;
 
-use App\Models\Customer;
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class CustomersExport implements FromCollection, ShouldAutoSize, WithHeadings
+class UsersExport implements FromCollection, ShouldAutoSize, WithHeadings
 {
     /**
      * @return \Illuminate\Support\Collection
      */
     public function collection()
     {
-        return Customer::all();
+        return User::all();
     }
 
     public function headings(): array
@@ -22,8 +22,8 @@ class CustomersExport implements FromCollection, ShouldAutoSize, WithHeadings
         return [
             'ID',
             'Name',
-            'Age',
-            'Phone'
+            'Email',
+            'Admin'
         ];
     }
 }

@@ -4,7 +4,15 @@
 
 @section('content')
     <div class="container mx-auto">
-        <h1 class="text-3xl font-semibold mb-4">User Management</h1>
+
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-semibold mb-4">User Management</h1>
+            <div>
+                <a href="{{ route('users.export') }}"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Download
+                    Excel</a>
+            </div>
+        </div>
 
         <div class="mt-8">
             <table class="min-w-full divide-y divide-gray-200">
@@ -12,7 +20,8 @@
                     <tr>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
