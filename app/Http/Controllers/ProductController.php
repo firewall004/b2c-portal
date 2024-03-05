@@ -47,20 +47,22 @@ class ProductController extends Controller
         }
     }
 
-    public function edit(Product $customer)
+    public function edit(Product $product)
     {
-        return view('products.edit', compact('customer'));
+        $customers = Customer::all();
+        return view('products.edit', compact('product', 'customers'));
     }
 
-    public function update(Request $request, Product $customer)
+    public function update(Request $request, Product $product)
     {
-        $customer->update($request->all());
+        $product->update($request->all());
+
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
-    public function destroy(Product $customer)
+    public function destroy(Product $product)
     {
-        $customer->delete();
+        $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
 
