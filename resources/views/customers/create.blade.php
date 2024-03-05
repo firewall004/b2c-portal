@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Customers')
+
 @section('content')
     <div class="container mx-auto">
 

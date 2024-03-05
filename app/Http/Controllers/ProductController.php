@@ -6,7 +6,10 @@ use App\Exports\ProductsExport;
 use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Throwable;
 
 class ProductController extends Controller
 {
@@ -24,9 +27,24 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        Product::create($request->all());
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'quantity' => 'required|integer|min:0',
+                'customer_id' => 'required|exists:customers,id',
+            ]);
+
+            DB::beginTransaction();
+
+            Product::create($validatedData);
+
+            DB::commit();
+            return redirect()->route('products.index')->with('success', 'Product created successfully.');
+        } catch (Throwable $th) {
+            DB::rollBack();
+            Log::error($th->getMessage());
+            throw $th;
+        }
     }
 
     public function edit(Product $customer)

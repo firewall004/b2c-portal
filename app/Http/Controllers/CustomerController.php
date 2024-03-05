@@ -5,14 +5,22 @@ namespace App\Http\Controllers;
 use App\Exports\CustomersExport;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Throwable;
 
 class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = Customer::all();
-        return view('customers.index', compact('customers'));
+        try {
+            $customers = Customer::all();
+            return view('customers.index', compact('customers'));
+        } catch (Throwable $th) {
+            Log::error($th->getMessage());
+            throw $th;
+        }
     }
 
     public function create()
@@ -22,12 +30,24 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        // TODO: Add validations
-        // TODO: Add try catch
-        // TODO: Add DB transactions
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'age' => 'required|integer|min:18',
+                'phone' => 'required|string|max:20',
+            ]);
 
-        Customer::create($request->all());
-        return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
+            DB::beginTransaction();
+
+            Customer::create($validatedData);
+
+            DB::commit();
+            return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
+        } catch (Throwable $th) {
+            DB::rollBack();
+            Log::error($th->getMessage());
+            throw $th;
+        }
     }
 
     public function edit(Customer $customer)

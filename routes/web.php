@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,4 +47,8 @@ Route::prefix('products')->middleware('auth')->group(function () {
     Route::put('/{customer}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/{customer}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/export', [ProductController::class, 'export'])->name('products.export');
+});
+
+Route::middleware('admin')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
 });

@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Products')
+
 @section('content')
     <div class="container mx-auto">
         <h1 class="text-3xl font-semibold mb-4">Edit Product</h1>

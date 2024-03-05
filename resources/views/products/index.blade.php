@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Products')
+
 @section('content')
     <div class="container mx-auto">
         <div class="flex justify-between items-center mb-4">

@@ -1,5 +1,7 @@
 @extends('layouts.main')
 
+@section('title', 'Register')
+
 @section('content')
     <div class="min-h-screen flex justify-center items-center">
         <div class="bg-white p-8 rounded shadow-md w-80">
