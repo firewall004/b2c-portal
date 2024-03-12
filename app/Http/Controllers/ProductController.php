@@ -6,7 +6,6 @@ use App\Exports\ProductsExport;
 use App\Models\Customer;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Throwable;
@@ -34,14 +33,10 @@ class ProductController extends Controller
                 'customer_id' => 'required|exists:customers,id',
             ]);
 
-            DB::beginTransaction();
-
             Product::create($validatedData);
 
-            DB::commit();
             return redirect()->route('products.index')->with('success', 'Product created successfully.');
         } catch (Throwable $th) {
-            DB::rollBack();
             Log::error($th->getMessage());
             throw $th;
         }
